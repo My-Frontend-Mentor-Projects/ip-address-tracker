@@ -2,7 +2,7 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/My-Frontend-Mentor-Projects/ip-address-tracker",
+  "homepage": "https://my-frontend-mentor-projects.github.io/ip-address-tracker/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
