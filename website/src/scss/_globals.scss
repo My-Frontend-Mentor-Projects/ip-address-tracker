@@ -41,3 +41,24 @@ body {
     }
   }
 }
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto;
+  margin-top: 10rem;
+  border-radius: 50%;
+  border: 3px solid $darkGray;
+  border-top-color: $veryDarkGray;
+  animation: spinner 0.6s linear infinite;
+}
+
+button[disabled] {
+  background-color: $veryDarkGray;
+}

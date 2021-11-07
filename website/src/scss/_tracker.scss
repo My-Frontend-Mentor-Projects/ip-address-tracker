@@ -18,6 +18,7 @@
     width: 100%;
     max-width: 34.6875rem;
     display: flex;
+    position: relative;
 
     input {
       flex: 1;
@@ -27,6 +28,17 @@
 
     button {
       border-radius: 0 1rem 1rem 0;
+    }
+
+    .error {
+      position: absolute;
+      bottom: -70%;
+      background-color: $red;
+      color: white;
+      padding: 0.4rem;
+      text-align: center;
+      width: 100%;
+      border-radius: 0.5rem;
     }
   }
 }
@@ -39,7 +51,7 @@
 
   &-info {
     position: absolute;
-    top: -30%;
+    top: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -55,7 +67,7 @@
     @include breakpoint-up(large) {
       flex-flow: row nowrap;
       gap: 3rem;
-      top: -16%;
+      top: -12%;
     }
 
     article {

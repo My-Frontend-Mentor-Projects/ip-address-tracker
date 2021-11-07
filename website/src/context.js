@@ -1,34 +1,50 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
-const apiUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_API_KEY}`;
 const AppContext = React.createContext();
+const API_ENDPOINT = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_API_KEY}`;
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
-  const [address, setAddress] = useState("");
-  const [locationInfo, setLocationInfo] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState({ show: false, msg: "" });
+  const [query, setQuery] = useState("&ipAddress=8.8.8.8");
+  const [addressData, setAddressData] = useState(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async (query) => {
+    setIsLoading(true);
     try {
-      const response = await fetch(`${apiUrl}&ipAddress=${address}`);
+      const response = await fetch(`${API_ENDPOINT}${query}`);
       const data = await response.json();
-      const newLocationInfo = {
-        ip: data.ip,
-        location: `${data.location.city}, ${data.location.country} ${data.location.postalCode}`,
-        timezone: data.location.timezone,
-        isp: data.isp,
-        lat: data.location.lat,
-        lng: data.location.lng,
-      };
-      setLocationInfo(newLocationInfo);
+      console.log(data);
+      if (!data.ip) {
+        setError({ show: true, msg: data.messages });
+        console.log(error);
+      } else {
+        const newData = {
+          ip: data.ip,
+          location: `${data.location.city}, ${data.location.country} ${data.location.postalCode}`,
+          timezone: data.location.timezone,
+          isp: data.isp,
+          lat: data.location.lat,
+          lng: data.location.lng,
+        };
+        setAddressData(newData);
+        setError({ show: false, msg: "" });
+      }
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setError({
+        show: true,
+        msg: "Something went wrong. please try again later.",
+      });
+      setIsLoading(false);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchData(query);
+  }, [query]);
 
   return (
-    <AppContext.Provider
-      value={{ setAddress, fetchData, locationInfo, setLocationInfo }}
-    >
+    <AppContext.Provider value={{ addressData, isLoading, fetchData, error }}>
       {children}
     </AppContext.Provider>
   );
