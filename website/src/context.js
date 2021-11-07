@@ -13,10 +13,8 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${API_ENDPOINT}${query}`);
       const data = await response.json();
-      console.log(data);
       if (!data.ip) {
         setError({ show: true, msg: data.messages });
-        console.log(error);
       } else {
         const newData = {
           ip: data.ip,
@@ -33,7 +31,7 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       setError({
         show: true,
-        msg: "Something went wrong. please try again later.",
+        msg: "Something went wrong. Please try again later.",
       });
       setIsLoading(false);
     }
@@ -44,7 +42,7 @@ const AppProvider = ({ children }) => {
   }, [query]);
 
   return (
-    <AppContext.Provider value={{ addressData, isLoading, fetchData, error }}>
+    <AppContext.Provider value={{ addressData, isLoading, error, setQuery }}>
       {children}
     </AppContext.Provider>
   );

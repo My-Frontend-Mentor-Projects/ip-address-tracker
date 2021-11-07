@@ -3,12 +3,12 @@ import iconArrow from "./images/icon-arrow.svg";
 import { useGlobalContext } from "./context";
 
 const SearchAddress = () => {
-  const { isLoading, fetchData, error } = useGlobalContext();
+  const { isLoading, error, setQuery } = useGlobalContext();
   const searchValue = React.useRef("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData(`&domain=${searchValue.current.value}`);
+    setQuery(`&domain=${searchValue.current.value}`);
     searchValue.current.value = "";
   };
 

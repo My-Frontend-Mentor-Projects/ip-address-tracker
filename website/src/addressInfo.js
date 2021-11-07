@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "./context";
+import MapView from "./MapView";
 
 const AddressInfo = () => {
   const { isLoading, addressData, error } = useGlobalContext();
@@ -11,31 +12,29 @@ const AddressInfo = () => {
   if (error.show) {
     return (
       <div className="location">
-        <div className="location-info">
-          <article>
-            <h4 className="item-title">ip address</h4>
-            <span className="item-value">-</span>
-          </article>
-          <article>
-            <h4 className="item-title">location</h4>
-            <span className="item-value">-</span>
-          </article>
-          <article>
-            <h4 className="item-title">timezone</h4>
-            <span className="item-value">-</span>
-          </article>
-          <article>
-            <h4 className="item-title">ISP</h4>
-            <span className="item-value">-</span>
-          </article>
-        </div>
+        <article>
+          <h4 className="item-title">ip address</h4>
+          <span className="item-value">-</span>
+        </article>
+        <article>
+          <h4 className="item-title">location</h4>
+          <span className="item-value">-</span>
+        </article>
+        <article>
+          <h4 className="item-title">timezone</h4>
+          <span className="item-value">-</span>
+        </article>
+        <article>
+          <h4 className="item-title">ISP</h4>
+          <span className="item-value">-</span>
+        </article>
       </div>
     );
   }
 
   return (
-    <div className="location">
-      <div className="location-info">
+    <>
+      <div className="location">
         <article>
           <h4 className="item-title">ip address</h4>
           <span className="item-value">{addressData.ip}</span>
@@ -53,7 +52,8 @@ const AddressInfo = () => {
           <span className="item-value">{addressData.isp}</span>
         </article>
       </div>
-    </div>
+      <MapView />
+    </>
   );
 };
 

@@ -2,7 +2,7 @@
   background-image: url(../images/pattern-bg.png);
   background-size: cover;
   background-position: 48% 100%;
-  min-height: 23.75rem;
+  min-height: 30.75rem;
   padding: 2.125rem 1.5rem;
   display: flex;
   flex-flow: column nowrap;
@@ -11,7 +11,7 @@
   align-items: center;
 
   @include breakpoint-up(large) {
-    min-height: 18.75rem;
+    min-height: 20.75rem;
   }
 
   &-form {
@@ -32,7 +32,7 @@
 
     .error {
       position: absolute;
-      bottom: -70%;
+      bottom: -3.5rem;
       background-color: $red;
       color: white;
       padding: 0.4rem;
@@ -44,72 +44,73 @@
 }
 
 .location {
-  background-color: rgb(230, 230, 230);
-  width: 100vw;
-  position: relative;
-  min-height: 80vh;
+  position: absolute;
+  top: 32%;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 69.625rem;
+  padding: 1.75rem;
+  background-color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  gap: 1.75rem;
+  border-radius: 1rem;
 
-  &-info {
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 69.625rem;
-    padding: 1.75rem;
-    background-color: white;
+  @include breakpoint-up(large) {
+    top: 40%;
+    flex-flow: row nowrap;
+    gap: 3rem;
+  }
+
+  article {
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    gap: 1.75rem;
-    border-radius: 1rem;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
 
     @include breakpoint-up(large) {
-      flex-flow: row nowrap;
-      gap: 3rem;
-      top: -12%;
-    }
+      align-items: flex-start;
 
-    article {
-      display: flex;
-      flex-flow: column wrap;
-      justify-content: flex-start;
-      align-items: center;
+      &:not(:first-child) {
+        padding-left: 2.125rem;
+        position: relative;
 
-      @include breakpoint-up(large) {
-        align-items: flex-start;
-
-        &:not(:first-child) {
-          padding-left: 2.125rem;
-          position: relative;
-
-          &:before {
-            position: absolute;
-            content: "";
-            width: 1px;
-            height: 70%;
-            background-color: rgb(221, 221, 221);
-            top: 25%;
-            left: 0;
-          }
+        &:before {
+          position: absolute;
+          content: "";
+          width: 1px;
+          height: 70%;
+          background-color: rgb(221, 221, 221);
+          top: 25%;
+          left: 0;
         }
       }
     }
+  }
 
-    .item-title {
-      text-transform: uppercase;
-      font-size: map-get($font-sizes, smedium);
-      color: $darkGray;
-    }
+  .item-title {
+    text-transform: uppercase;
+    font-size: map-get($font-sizes, smedium);
+    color: $darkGray;
+  }
 
-    .item-value {
-      font-size: map-get($font-sizes, xmedium);
-      color: $veryDarkGray;
-      font-weight: map-get($font-weights, medium);
+  .item-value {
+    font-size: map-get($font-sizes, xmedium);
+    color: $veryDarkGray;
+    font-weight: map-get($font-weights, medium);
 
-      @include breakpoint-up(large) {
-        font-size: map-get($font-sizes, large);
-      }
+    @include breakpoint-up(large) {
+      font-size: map-get($font-sizes, large);
     }
   }
+}
+
+.leaflet-container {
+  height: 70vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }

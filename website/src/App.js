@@ -1,6 +1,6 @@
 import React from "react";
 import SearchAddress from "./SearchAddress";
-import AddressInfo from "./addressInfo";
+import AddressInfo from "./AddressInfo";
 
 function App() {
   return (
